@@ -12,6 +12,6 @@ namespace MailTracker.Tracker.Models
         [JsonProperty("status")]
         public int Status { get; set; }
         [JsonProperty("result")]
-        public HistoryItem[] Items { get; set; }
+        public HistoryItem[] Result { get; set; }
     }
 }

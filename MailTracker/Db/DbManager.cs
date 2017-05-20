@@ -2,6 +2,8 @@
 using MailTracker.Db.Models;
 using System.Data.SQLite;
 using System.Linq;
+using System;
+using System.Collections.Generic;
 
 namespace MailTracker.Db
 {
@@ -23,6 +25,17 @@ namespace MailTracker.Db
             {
                 return db.Query<Url>("select url as URL from url where language = @language",
                     new { language }).SingleOrDefault().URL;
+            }
+        }
+
+        // ----------------------------------
+        // Get All Numbers
+        // ----------------------------------
+        public List<Numbers> GetNumbers()
+        {
+            using (SQLiteConnection db = new SQLiteConnection(connString))
+            {
+                return db.Query<Numbers>("select id as Id, number as Number from number order by id").ToList();
             }
         }
     }

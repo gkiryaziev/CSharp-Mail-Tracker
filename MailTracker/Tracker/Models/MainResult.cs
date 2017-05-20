@@ -12,6 +12,6 @@ namespace MailTracker.Tracker.Models
         [JsonProperty("status")]
         public int Status { get; set; }
         [JsonProperty("result")]
-        public Dictionary<string, TrackResult> Results { get; set; }
+        public Dictionary<string, TrackResult> Result { get; set; }
     }
 }

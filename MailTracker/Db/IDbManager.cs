@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MailTracker.Db.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,5 +15,12 @@ namespace MailTracker.Db
         string GetUrl(string language);
         // update url
         // delete url
+
+        // insert number
+        // select number's
+        List<Numbers> GetNumbers();
+        // select number
+        // update number
+        // delete number
     }
 }

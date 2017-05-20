@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace MailTracker.Db.Models
 {
-    public class Url
+    public class Numbers
     {
         public int ID { get; set; }
-        public string Language { get; set; }
-        public string URL { get; set; }
+        public string Number { get; set; }
     }
 }

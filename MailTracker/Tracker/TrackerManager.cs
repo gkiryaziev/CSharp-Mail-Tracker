@@ -14,9 +14,11 @@ namespace MailTracker.Tracker
         // Http client
         HttpClient client = new HttpClient();
         // Database manager
-        DbManager _dbm;
+        DbManager _dbm = null;
         // track number
         string _number;
+
+        bool debug = false;
 
         public TrackerManager(DbManager dbm)
         {
@@ -39,7 +41,9 @@ namespace MailTracker.Tracker
             FormUrlEncodedContent content = new FormUrlEncodedContent(values);
             HttpResponseMessage response = await client.PostAsync(URL, content);
 
-            return jsonToObj(await response.Content.ReadAsStringAsync());
+            string responseString = await response.Content.ReadAsStringAsync();
+
+            return jsonToObj(responseString);
         }
 
         //----------------------------------
@@ -47,19 +51,26 @@ namespace MailTracker.Tracker
         //----------------------------------
         private HistoryItem[] jsonToObj(string json)
         {
-            MainResult result;
+            MainResult mainResult;
 
             try
             {
-                result = JsonConvert.DeserializeObject<MainResult>(json);
+                mainResult = JsonConvert.DeserializeObject<MainResult>(json);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                if (debug)
+                {
+                    MessageBox.Show(ex.Message, $"{_number}", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    MessageBox.Show($"No results found!", $"{_number}", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
                 return null;
             }
 
-            return result.Results[_number].Items;
+            return mainResult.Result[_number].Result;
         }
     }
 }

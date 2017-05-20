@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="Db\DbManager.cs" />
     <Compile Include="Db\IDbManager.cs" />
+    <Compile Include="Db\Models\Numbers.cs" />
     <Compile Include="Db\Models\Url.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
