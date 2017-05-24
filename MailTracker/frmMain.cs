@@ -76,6 +76,8 @@ namespace MailTracker
             try
             {
                 dgvResults.DataSource = await trm.Track(number, language);
+                dgvResults.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+                //dgvResults.Columns[0].HeaderText = "Date";
             }
             catch (Exception ex)
             {
@@ -110,6 +112,43 @@ namespace MailTracker
             mbtnLangGreek.Checked = true;
             language = "el";
             ssLoging.Image = imageListMain.Images[1];
+        }
+
+        //----------------------------------
+        // lstNumbers MouseDown Method
+        //----------------------------------
+        private void lstNumbers_MouseDown(object sender, MouseEventArgs e)
+        {
+            lstNumbers.SelectedIndex = lstNumbers.IndexFromPoint(e.X, e.Y);
+        }
+
+        //----------------------------------
+        // numbersCxtMenu btnAdd Click Method
+        //----------------------------------
+        private void numbersCxtMenu_btnAdd_Click(object sender, EventArgs e)
+        {
+            using (frmNumbers n = new frmNumbers())
+            {
+                n.Owner = this;
+                n.OpenForm(dbm);
+            }
+        }
+
+        //----------------------------------
+        // numbersCxtMenu btnUpdate Click Method
+        //----------------------------------
+        private void numbersCxtMenu_btnUpdate_Click(object sender, EventArgs e)
+        {
+            using (frmNumbers n = new frmNumbers())
+            {
+                if (number == null || number.Length != 13)
+                {
+                    return;
+                }
+
+                n.Owner = this;
+                n.OpenForm(dbm, number);
+            }
         }
     }
 }

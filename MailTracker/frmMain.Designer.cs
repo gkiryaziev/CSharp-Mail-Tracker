@@ -33,6 +33,7 @@
             this.dgvResults = new System.Windows.Forms.DataGridView();
             this.lstNumbers = new System.Windows.Forms.ListBox();
             this.statusStripMain = new System.Windows.Forms.StatusStrip();
+            this.ssLoging = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.toolStripMain = new System.Windows.Forms.ToolStrip();
             this.tbtnUpdate = new System.Windows.Forms.ToolStripButton();
@@ -42,8 +43,12 @@
             this.mbtnLanguage = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnLangEnglish = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnLangGreek = new System.Windows.Forms.ToolStripMenuItem();
-            this.ssLoging = new System.Windows.Forms.ToolStripStatusLabel();
             this.imageListMain = new System.Windows.Forms.ImageList(this.components);
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.numbersCxtMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.numbersCxtMenu_btnAdd = new System.Windows.Forms.ToolStripMenuItem();
+            this.numbersCxtMenu_btnUpdate = new System.Windows.Forms.ToolStripMenuItem();
+            this.numbersCxtMenu_btnDelete = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResults)).BeginInit();
             this.statusStripMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -52,6 +57,7 @@
             this.splitContainer1.SuspendLayout();
             this.toolStripMain.SuspendLayout();
             this.menuStripMain.SuspendLayout();
+            this.numbersCxtMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvResults
@@ -65,6 +71,7 @@
             // 
             // lstNumbers
             // 
+            this.lstNumbers.ContextMenuStrip = this.numbersCxtMenu;
             this.lstNumbers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstNumbers.FormattingEnabled = true;
             this.lstNumbers.Location = new System.Drawing.Point(0, 0);
@@ -72,6 +79,7 @@
             this.lstNumbers.Size = new System.Drawing.Size(173, 380);
             this.lstNumbers.TabIndex = 5;
             this.lstNumbers.SelectedIndexChanged += new System.EventHandler(this.lstNumbers_SelectedIndexChanged);
+            this.lstNumbers.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lstNumbers_MouseDown);
             // 
             // statusStripMain
             // 
@@ -82,6 +90,12 @@
             this.statusStripMain.Size = new System.Drawing.Size(708, 22);
             this.statusStripMain.TabIndex = 6;
             this.statusStripMain.Text = "statusStrip1";
+            // 
+            // ssLoging
+            // 
+            this.ssLoging.Name = "ssLoging";
+            this.ssLoging.Size = new System.Drawing.Size(10, 17);
+            this.ssLoging.Text = " ";
             // 
             // splitContainer1
             // 
@@ -105,7 +119,8 @@
             // toolStripMain
             // 
             this.toolStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tbtnUpdate});
+            this.tbtnUpdate,
+            this.toolStripSeparator1});
             this.toolStripMain.Location = new System.Drawing.Point(0, 24);
             this.toolStripMain.Name = "toolStripMain";
             this.toolStripMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -161,22 +176,16 @@
             // mbtnLangEnglish
             // 
             this.mbtnLangEnglish.Name = "mbtnLangEnglish";
-            this.mbtnLangEnglish.Size = new System.Drawing.Size(152, 22);
+            this.mbtnLangEnglish.Size = new System.Drawing.Size(121, 22);
             this.mbtnLangEnglish.Text = "English";
             this.mbtnLangEnglish.Click += new System.EventHandler(this.mbtnLangEnglish_Click);
             // 
             // mbtnLangGreek
             // 
             this.mbtnLangGreek.Name = "mbtnLangGreek";
-            this.mbtnLangGreek.Size = new System.Drawing.Size(152, 22);
+            this.mbtnLangGreek.Size = new System.Drawing.Size(121, 22);
             this.mbtnLangGreek.Text = "Ελληνικά";
             this.mbtnLangGreek.Click += new System.EventHandler(this.mbtnLangGreek_Click);
-            // 
-            // ssLoging
-            // 
-            this.ssLoging.Name = "ssLoging";
-            this.ssLoging.Size = new System.Drawing.Size(10, 17);
-            this.ssLoging.Text = " ";
             // 
             // imageListMain
             // 
@@ -184,6 +193,40 @@
             this.imageListMain.TransparentColor = System.Drawing.Color.Transparent;
             this.imageListMain.Images.SetKeyName(0, "en");
             this.imageListMain.Images.SetKeyName(1, "el");
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // numbersCxtMenu
+            // 
+            this.numbersCxtMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.numbersCxtMenu_btnAdd,
+            this.numbersCxtMenu_btnUpdate,
+            this.numbersCxtMenu_btnDelete});
+            this.numbersCxtMenu.Name = "numbersCxtMenu";
+            this.numbersCxtMenu.Size = new System.Drawing.Size(113, 70);
+            // 
+            // numbersCxtMenu_btnAdd
+            // 
+            this.numbersCxtMenu_btnAdd.Name = "numbersCxtMenu_btnAdd";
+            this.numbersCxtMenu_btnAdd.Size = new System.Drawing.Size(152, 22);
+            this.numbersCxtMenu_btnAdd.Text = "Add";
+            this.numbersCxtMenu_btnAdd.Click += new System.EventHandler(this.numbersCxtMenu_btnAdd_Click);
+            // 
+            // numbersCxtMenu_btnUpdate
+            // 
+            this.numbersCxtMenu_btnUpdate.Name = "numbersCxtMenu_btnUpdate";
+            this.numbersCxtMenu_btnUpdate.Size = new System.Drawing.Size(152, 22);
+            this.numbersCxtMenu_btnUpdate.Text = "Update";
+            this.numbersCxtMenu_btnUpdate.Click += new System.EventHandler(this.numbersCxtMenu_btnUpdate_Click);
+            // 
+            // numbersCxtMenu_btnDelete
+            // 
+            this.numbersCxtMenu_btnDelete.Name = "numbersCxtMenu_btnDelete";
+            this.numbersCxtMenu_btnDelete.Size = new System.Drawing.Size(112, 22);
+            this.numbersCxtMenu_btnDelete.Text = "Delete";
             // 
             // frmMain
             // 
@@ -210,6 +253,7 @@
             this.toolStripMain.PerformLayout();
             this.menuStripMain.ResumeLayout(false);
             this.menuStripMain.PerformLayout();
+            this.numbersCxtMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -230,6 +274,11 @@
         private System.Windows.Forms.ToolStripMenuItem mbtnLangGreek;
         private System.Windows.Forms.ToolStripStatusLabel ssLoging;
         private System.Windows.Forms.ImageList imageListMain;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ContextMenuStrip numbersCxtMenu;
+        private System.Windows.Forms.ToolStripMenuItem numbersCxtMenu_btnAdd;
+        private System.Windows.Forms.ToolStripMenuItem numbersCxtMenu_btnUpdate;
+        private System.Windows.Forms.ToolStripMenuItem numbersCxtMenu_btnDelete;
     }
 }
 
