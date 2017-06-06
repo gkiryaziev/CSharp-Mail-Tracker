@@ -31,12 +31,14 @@ namespace MailTracker.Tracker
         public async Task<HistoryItem[]> Track(string number, string language)
         {
             _number = number;
-            string URL = _dbm.GetUrl(language);
+            string URL = _dbm.SelectUrl(language);
 
             Dictionary<string, string> values = new Dictionary<string, string>
             {
                { "number", number },
             };
+
+            // client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:19.0) Gecko/20100101 Firefox/19.0");
 
             FormUrlEncodedContent content = new FormUrlEncodedContent(values);
             HttpResponseMessage response = await client.PostAsync(URL, content);

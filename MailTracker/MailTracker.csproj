@@ -79,11 +79,11 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmNumbers.cs">
+    <Compile Include="frmNumber.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmNumbers.Designer.cs">
-      <DependentUpon>frmNumbers.cs</DependentUpon>
+    <Compile Include="frmNumber.Designer.cs">
+      <DependentUpon>frmNumber.cs</DependentUpon>
     </Compile>
     <Compile Include="Tracker\Models\HistoryItem.cs" />
     <Compile Include="Tracker\Models\TrackResult.cs" />
@@ -95,8 +95,8 @@
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmNumbers.resx">
-      <DependentUpon>frmNumbers.cs</DependentUpon>
+    <EmbeddedResource Include="frmNumber.resx">
+      <DependentUpon>frmNumber.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

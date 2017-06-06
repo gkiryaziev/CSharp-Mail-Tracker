@@ -27,22 +27,36 @@ namespace MailTracker
         //----------------------------------
         private void frmMain_Load(object sender, EventArgs e)
         {
+            // create database and tables if not exists
+            dbm.CreateTables();
+
             // default language is English
             mbtnLangEnglish.Checked = true;
             language = "en";
             ssLoging.Image = imageListMain.Images[0];
 
             trm = new TrackerManager(dbm);
-            FillNumberList();
-            lstNumbers.SelectedIndex = 0;
+
+            try
+            {
+                UpdateNumberList();
+                lstNumbers.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Please add settings and restart.", "Empty database", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
         }
 
         //----------------------------------
-        // Fill List with Numbers Method
+        // Update List with Numbers Method
         //----------------------------------
-        private void FillNumberList()
+        public void UpdateNumberList()
         {
-            List<Numbers> nubmers = dbm.GetNumbers();
+            lstNumbers.Items.Clear();
+
+            List<Numbers> nubmers = dbm.SelectNumbers();
 
             foreach (var n in nubmers)
             {
@@ -61,7 +75,15 @@ namespace MailTracker
         //----------------------------------
         // tbtnUpdate Click Method
         //----------------------------------
-        private async void tbtnUpdate_Click(object sender, EventArgs e)
+        private void tbtnUpdate_Click(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        //----------------------------------
+        // Load Data Method
+        //----------------------------------
+        private async void LoadData()
         {
             if (number == null || number.Length != 13)
             {
@@ -69,6 +91,7 @@ namespace MailTracker
             }
 
             // Logging
+            tbtnUpdate.Enabled = false;
             ssLoging.Text = "Updating...";
             var stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -90,6 +113,7 @@ namespace MailTracker
             stopwatch.Stop();
             long elapsed_time = stopwatch.ElapsedMilliseconds;
             ssLoging.Text = $"Done. ({elapsed_time} ms.)";
+            tbtnUpdate.Enabled = true;
         }
 
         //----------------------------------
@@ -127,7 +151,7 @@ namespace MailTracker
         //----------------------------------
         private void numbersCxtMenu_btnAdd_Click(object sender, EventArgs e)
         {
-            using (frmNumbers n = new frmNumbers())
+            using (frmNumber n = new frmNumber())
             {
                 n.Owner = this;
                 n.OpenForm(dbm);
@@ -139,9 +163,9 @@ namespace MailTracker
         //----------------------------------
         private void numbersCxtMenu_btnUpdate_Click(object sender, EventArgs e)
         {
-            using (frmNumbers n = new frmNumbers())
+            using (frmNumber n = new frmNumber())
             {
-                if (number == null || number.Length != 13)
+                if (string.IsNullOrEmpty(number))
                 {
                     return;
                 }
@@ -150,8 +174,27 @@ namespace MailTracker
                 n.OpenForm(dbm, number);
             }
         }
+
+        //----------------------------------
+        // numbersCxtMenu btnDelete Click Method
+        //----------------------------------
+        private void numbersCxtMenu_btnDelete_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(number))
+            {
+                try
+                {
+                    dbm.DeleteNumber(number);
+                    UpdateNumberList();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return;
+                }
+            }
+        }
     }
 }
 
 // TODO: add settings (db, debug, url's)
-// TODO: numbers (add, update, delete)

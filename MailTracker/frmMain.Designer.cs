@@ -32,11 +32,16 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.dgvResults = new System.Windows.Forms.DataGridView();
             this.lstNumbers = new System.Windows.Forms.ListBox();
+            this.numbersCxtMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.numbersCxtMenu_btnAdd = new System.Windows.Forms.ToolStripMenuItem();
+            this.numbersCxtMenu_btnUpdate = new System.Windows.Forms.ToolStripMenuItem();
+            this.numbersCxtMenu_btnDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStripMain = new System.Windows.Forms.StatusStrip();
             this.ssLoging = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.toolStripMain = new System.Windows.Forms.ToolStrip();
             this.tbtnUpdate = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStripMain = new System.Windows.Forms.MenuStrip();
             this.mbtnFile = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnExit = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,12 +49,8 @@
             this.mbtnLangEnglish = new System.Windows.Forms.ToolStripMenuItem();
             this.mbtnLangGreek = new System.Windows.Forms.ToolStripMenuItem();
             this.imageListMain = new System.Windows.Forms.ImageList(this.components);
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.numbersCxtMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.numbersCxtMenu_btnAdd = new System.Windows.Forms.ToolStripMenuItem();
-            this.numbersCxtMenu_btnUpdate = new System.Windows.Forms.ToolStripMenuItem();
-            this.numbersCxtMenu_btnDelete = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResults)).BeginInit();
+            this.numbersCxtMenu.SuspendLayout();
             this.statusStripMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -57,7 +58,6 @@
             this.splitContainer1.SuspendLayout();
             this.toolStripMain.SuspendLayout();
             this.menuStripMain.SuspendLayout();
-            this.numbersCxtMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvResults
@@ -80,6 +80,36 @@
             this.lstNumbers.TabIndex = 5;
             this.lstNumbers.SelectedIndexChanged += new System.EventHandler(this.lstNumbers_SelectedIndexChanged);
             this.lstNumbers.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lstNumbers_MouseDown);
+            // 
+            // numbersCxtMenu
+            // 
+            this.numbersCxtMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.numbersCxtMenu_btnAdd,
+            this.numbersCxtMenu_btnUpdate,
+            this.numbersCxtMenu_btnDelete});
+            this.numbersCxtMenu.Name = "numbersCxtMenu";
+            this.numbersCxtMenu.Size = new System.Drawing.Size(153, 92);
+            // 
+            // numbersCxtMenu_btnAdd
+            // 
+            this.numbersCxtMenu_btnAdd.Name = "numbersCxtMenu_btnAdd";
+            this.numbersCxtMenu_btnAdd.Size = new System.Drawing.Size(152, 22);
+            this.numbersCxtMenu_btnAdd.Text = "Add";
+            this.numbersCxtMenu_btnAdd.Click += new System.EventHandler(this.numbersCxtMenu_btnAdd_Click);
+            // 
+            // numbersCxtMenu_btnUpdate
+            // 
+            this.numbersCxtMenu_btnUpdate.Name = "numbersCxtMenu_btnUpdate";
+            this.numbersCxtMenu_btnUpdate.Size = new System.Drawing.Size(152, 22);
+            this.numbersCxtMenu_btnUpdate.Text = "Update";
+            this.numbersCxtMenu_btnUpdate.Click += new System.EventHandler(this.numbersCxtMenu_btnUpdate_Click);
+            // 
+            // numbersCxtMenu_btnDelete
+            // 
+            this.numbersCxtMenu_btnDelete.Name = "numbersCxtMenu_btnDelete";
+            this.numbersCxtMenu_btnDelete.Size = new System.Drawing.Size(152, 22);
+            this.numbersCxtMenu_btnDelete.Text = "Delete";
+            this.numbersCxtMenu_btnDelete.Click += new System.EventHandler(this.numbersCxtMenu_btnDelete_Click);
             // 
             // statusStripMain
             // 
@@ -138,6 +168,11 @@
             this.tbtnUpdate.Text = "Update";
             this.tbtnUpdate.Click += new System.EventHandler(this.tbtnUpdate_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
             // menuStripMain
             // 
             this.menuStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -194,40 +229,6 @@
             this.imageListMain.Images.SetKeyName(0, "en");
             this.imageListMain.Images.SetKeyName(1, "el");
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // numbersCxtMenu
-            // 
-            this.numbersCxtMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.numbersCxtMenu_btnAdd,
-            this.numbersCxtMenu_btnUpdate,
-            this.numbersCxtMenu_btnDelete});
-            this.numbersCxtMenu.Name = "numbersCxtMenu";
-            this.numbersCxtMenu.Size = new System.Drawing.Size(113, 70);
-            // 
-            // numbersCxtMenu_btnAdd
-            // 
-            this.numbersCxtMenu_btnAdd.Name = "numbersCxtMenu_btnAdd";
-            this.numbersCxtMenu_btnAdd.Size = new System.Drawing.Size(152, 22);
-            this.numbersCxtMenu_btnAdd.Text = "Add";
-            this.numbersCxtMenu_btnAdd.Click += new System.EventHandler(this.numbersCxtMenu_btnAdd_Click);
-            // 
-            // numbersCxtMenu_btnUpdate
-            // 
-            this.numbersCxtMenu_btnUpdate.Name = "numbersCxtMenu_btnUpdate";
-            this.numbersCxtMenu_btnUpdate.Size = new System.Drawing.Size(152, 22);
-            this.numbersCxtMenu_btnUpdate.Text = "Update";
-            this.numbersCxtMenu_btnUpdate.Click += new System.EventHandler(this.numbersCxtMenu_btnUpdate_Click);
-            // 
-            // numbersCxtMenu_btnDelete
-            // 
-            this.numbersCxtMenu_btnDelete.Name = "numbersCxtMenu_btnDelete";
-            this.numbersCxtMenu_btnDelete.Size = new System.Drawing.Size(112, 22);
-            this.numbersCxtMenu_btnDelete.Text = "Delete";
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -243,6 +244,7 @@
             this.Text = "Mail Tracker";
             this.Load += new System.EventHandler(this.frmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvResults)).EndInit();
+            this.numbersCxtMenu.ResumeLayout(false);
             this.statusStripMain.ResumeLayout(false);
             this.statusStripMain.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -253,7 +255,6 @@
             this.toolStripMain.PerformLayout();
             this.menuStripMain.ResumeLayout(false);
             this.menuStripMain.PerformLayout();
-            this.numbersCxtMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -1,6 +1,6 @@
 ﻿namespace MailTracker
 {
-    partial class frmNumbers
+    partial class frmNumber
     {
         /// <summary>
         /// Required designer variable.
