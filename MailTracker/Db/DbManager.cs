@@ -34,7 +34,7 @@ namespace MailTracker.Db
         {
             using (SQLiteConnection db = new SQLiteConnection(connString))
             {
-                return db.Query<Numbers>("select id as Id, number as Number from number order by id").ToList();
+                return db.Query<Numbers>("select id as Id, number as Number, closed as Closed from number order by id").ToList();
             }
         }
 
@@ -52,7 +52,8 @@ namespace MailTracker.Db
 
                 var n = db.Execute(@"CREATE TABLE IF NOT EXISTS number (
                     id     INTEGER      PRIMARY KEY AUTOINCREMENT,
-                    number VARCHAR (20) NOT NULL UNIQUE);");
+                    number VARCHAR (20) NOT NULL,
+                    closed INTEGER      DEFAULT (0));");
             }
         }
 

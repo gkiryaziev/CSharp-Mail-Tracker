@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace MailTracker
 {
@@ -40,7 +41,6 @@ namespace MailTracker
             try
             {
                 UpdateNumberList();
-                lstNumbers.SelectedIndex = 0;
             }
             catch (Exception ex)
             {
@@ -54,22 +54,31 @@ namespace MailTracker
         //----------------------------------
         public void UpdateNumberList()
         {
-            lstNumbers.Items.Clear();
-
             List<Numbers> nubmers = dbm.SelectNumbers();
+
+            lstViewNumbers.Items.Clear();
 
             foreach (var n in nubmers)
             {
-                lstNumbers.Items.Add(n.Number);
+                ListViewItem item = new ListViewItem(n.Number);
+                if (n.Closed == 1)
+                {
+                    item.BackColor = Color.Bisque;
+                }
+                lstViewNumbers.Items.Add(item);
             }
+
         }
 
         //----------------------------------
-        // lstNumbers Selected Index Changed Method
+        // lstViewNumbers Selected Index Changed Method
         //----------------------------------
-        private void lstNumbers_SelectedIndexChanged(object sender, EventArgs e)
+        private void lstViewNumbers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            number = lstNumbers.GetItemText(lstNumbers.SelectedItem);
+            if (lstViewNumbers.SelectedItems.Count > 0)
+                number = lstViewNumbers.SelectedItems[0].Text.Trim();
+            else
+                number = null;
         }
 
         //----------------------------------
@@ -85,6 +94,11 @@ namespace MailTracker
         //----------------------------------
         private async void LoadData()
         {
+            if (lstViewNumbers.SelectedItems.Count <= 0)
+            {
+                return;
+            }
+
             if (number == null || number.Length != 13)
             {
                 return;
@@ -139,14 +153,6 @@ namespace MailTracker
         }
 
         //----------------------------------
-        // lstNumbers MouseDown Method
-        //----------------------------------
-        private void lstNumbers_MouseDown(object sender, MouseEventArgs e)
-        {
-            lstNumbers.SelectedIndex = lstNumbers.IndexFromPoint(e.X, e.Y);
-        }
-
-        //----------------------------------
         // numbersCxtMenu btnAdd Click Method
         //----------------------------------
         private void numbersCxtMenu_btnAdd_Click(object sender, EventArgs e)
@@ -158,18 +164,24 @@ namespace MailTracker
             }
         }
 
+
         //----------------------------------
-        // numbersCxtMenu btnUpdate Click Method
+        // numbersCxtMenu btnEdit Click Method
         //----------------------------------
-        private void numbersCxtMenu_btnUpdate_Click(object sender, EventArgs e)
+        private void numbersCxtMenu_btnEdit_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(number))
+            {
+                return;
+            }
+
+            if (lstViewNumbers.SelectedItems.Count <= 0)
+            {
+                return;
+            }
+
             using (frmNumber n = new frmNumber())
             {
-                if (string.IsNullOrEmpty(number))
-                {
-                    return;
-                }
-
                 n.Owner = this;
                 n.OpenForm(dbm, number);
             }
@@ -180,21 +192,42 @@ namespace MailTracker
         //----------------------------------
         private void numbersCxtMenu_btnDelete_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(number))
+            if (string.IsNullOrEmpty(number))
             {
-                try
-                {
-                    dbm.DeleteNumber(number);
-                    UpdateNumberList();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    return;
-                }
+                return;
+            }
+
+            if (lstViewNumbers.SelectedItems.Count <= 0)
+            {
+                return;
+            }
+
+            try
+            {
+                dbm.DeleteNumber(number);
+                UpdateNumberList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
         }
     }
 }
 
 // TODO: add settings (db, debug, url's)
+// TODO: add focus and read from clipboard when new
+// TODO: doubleclick for editing
+// TODO: message box on delete
+// TODO: rename update -> edit                          +
+// TODO: update & update all
+// TODO: -- add closed flag to numbers                  +
+// TODO: -- add indication for closed
+// TODO: local storage
+// TODO: read from local storage when click
+// TODO: clear variables when list is empty             +
+// TODO: backup database
+// TODO: report generator
+// TODO: change listbox -> listview                     +
+// TODO: add closed to number form

@@ -31,14 +31,15 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.dgvResults = new System.Windows.Forms.DataGridView();
-            this.lstNumbers = new System.Windows.Forms.ListBox();
             this.numbersCxtMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.numbersCxtMenu_btnAdd = new System.Windows.Forms.ToolStripMenuItem();
-            this.numbersCxtMenu_btnUpdate = new System.Windows.Forms.ToolStripMenuItem();
+            this.numbersCxtMenu_btnEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.numbersCxtMenu_btnDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStripMain = new System.Windows.Forms.StatusStrip();
             this.ssLoging = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.lstViewNumbers = new System.Windows.Forms.ListView();
+            this.cHeaderNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.toolStripMain = new System.Windows.Forms.ToolStrip();
             this.tbtnUpdate = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -66,26 +67,15 @@
             this.dgvResults.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvResults.Location = new System.Drawing.Point(0, 0);
             this.dgvResults.Name = "dgvResults";
-            this.dgvResults.Size = new System.Drawing.Size(531, 380);
+            this.dgvResults.RowHeadersVisible = false;
+            this.dgvResults.Size = new System.Drawing.Size(674, 380);
             this.dgvResults.TabIndex = 4;
-            // 
-            // lstNumbers
-            // 
-            this.lstNumbers.ContextMenuStrip = this.numbersCxtMenu;
-            this.lstNumbers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lstNumbers.FormattingEnabled = true;
-            this.lstNumbers.Location = new System.Drawing.Point(0, 0);
-            this.lstNumbers.Name = "lstNumbers";
-            this.lstNumbers.Size = new System.Drawing.Size(173, 380);
-            this.lstNumbers.TabIndex = 5;
-            this.lstNumbers.SelectedIndexChanged += new System.EventHandler(this.lstNumbers_SelectedIndexChanged);
-            this.lstNumbers.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lstNumbers_MouseDown);
             // 
             // numbersCxtMenu
             // 
             this.numbersCxtMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.numbersCxtMenu_btnAdd,
-            this.numbersCxtMenu_btnUpdate,
+            this.numbersCxtMenu_btnEdit,
             this.numbersCxtMenu_btnDelete});
             this.numbersCxtMenu.Name = "numbersCxtMenu";
             this.numbersCxtMenu.Size = new System.Drawing.Size(153, 92);
@@ -97,12 +87,12 @@
             this.numbersCxtMenu_btnAdd.Text = "Add";
             this.numbersCxtMenu_btnAdd.Click += new System.EventHandler(this.numbersCxtMenu_btnAdd_Click);
             // 
-            // numbersCxtMenu_btnUpdate
+            // numbersCxtMenu_btnEdit
             // 
-            this.numbersCxtMenu_btnUpdate.Name = "numbersCxtMenu_btnUpdate";
-            this.numbersCxtMenu_btnUpdate.Size = new System.Drawing.Size(152, 22);
-            this.numbersCxtMenu_btnUpdate.Text = "Update";
-            this.numbersCxtMenu_btnUpdate.Click += new System.EventHandler(this.numbersCxtMenu_btnUpdate_Click);
+            this.numbersCxtMenu_btnEdit.Name = "numbersCxtMenu_btnEdit";
+            this.numbersCxtMenu_btnEdit.Size = new System.Drawing.Size(152, 22);
+            this.numbersCxtMenu_btnEdit.Text = "Edit";
+            this.numbersCxtMenu_btnEdit.Click += new System.EventHandler(this.numbersCxtMenu_btnEdit_Click);
             // 
             // numbersCxtMenu_btnDelete
             // 
@@ -117,7 +107,7 @@
             this.ssLoging});
             this.statusStripMain.Location = new System.Drawing.Point(0, 435);
             this.statusStripMain.Name = "statusStripMain";
-            this.statusStripMain.Size = new System.Drawing.Size(708, 22);
+            this.statusStripMain.Size = new System.Drawing.Size(889, 22);
             this.statusStripMain.TabIndex = 6;
             this.statusStripMain.Text = "statusStrip1";
             // 
@@ -137,14 +127,33 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.lstNumbers);
+            this.splitContainer1.Panel1.Controls.Add(this.lstViewNumbers);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dgvResults);
-            this.splitContainer1.Size = new System.Drawing.Size(708, 380);
-            this.splitContainer1.SplitterDistance = 173;
+            this.splitContainer1.Size = new System.Drawing.Size(889, 380);
+            this.splitContainer1.SplitterDistance = 211;
             this.splitContainer1.TabIndex = 7;
+            // 
+            // lstViewNumbers
+            // 
+            this.lstViewNumbers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.cHeaderNumber});
+            this.lstViewNumbers.ContextMenuStrip = this.numbersCxtMenu;
+            this.lstViewNumbers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstViewNumbers.Location = new System.Drawing.Point(0, 0);
+            this.lstViewNumbers.Name = "lstViewNumbers";
+            this.lstViewNumbers.Size = new System.Drawing.Size(211, 380);
+            this.lstViewNumbers.TabIndex = 6;
+            this.lstViewNumbers.UseCompatibleStateImageBehavior = false;
+            this.lstViewNumbers.View = System.Windows.Forms.View.Details;
+            this.lstViewNumbers.SelectedIndexChanged += new System.EventHandler(this.lstViewNumbers_SelectedIndexChanged);
+            // 
+            // cHeaderNumber
+            // 
+            this.cHeaderNumber.Text = "Number";
+            this.cHeaderNumber.Width = 100;
             // 
             // toolStripMain
             // 
@@ -154,7 +163,7 @@
             this.toolStripMain.Location = new System.Drawing.Point(0, 24);
             this.toolStripMain.Name = "toolStripMain";
             this.toolStripMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStripMain.Size = new System.Drawing.Size(708, 25);
+            this.toolStripMain.Size = new System.Drawing.Size(889, 25);
             this.toolStripMain.TabIndex = 9;
             this.toolStripMain.Text = "toolStrip1";
             // 
@@ -181,7 +190,7 @@
             this.menuStripMain.Location = new System.Drawing.Point(0, 0);
             this.menuStripMain.Name = "menuStripMain";
             this.menuStripMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.menuStripMain.Size = new System.Drawing.Size(708, 24);
+            this.menuStripMain.Size = new System.Drawing.Size(889, 24);
             this.menuStripMain.TabIndex = 8;
             this.menuStripMain.Text = "menuStrip1";
             // 
@@ -233,7 +242,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(708, 457);
+            this.ClientSize = new System.Drawing.Size(889, 457);
             this.Controls.Add(this.toolStripMain);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.statusStripMain);
@@ -262,7 +271,6 @@
 
         #endregion
         private System.Windows.Forms.DataGridView dgvResults;
-        private System.Windows.Forms.ListBox lstNumbers;
         private System.Windows.Forms.StatusStrip statusStripMain;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ToolStrip toolStripMain;
@@ -278,8 +286,10 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ContextMenuStrip numbersCxtMenu;
         private System.Windows.Forms.ToolStripMenuItem numbersCxtMenu_btnAdd;
-        private System.Windows.Forms.ToolStripMenuItem numbersCxtMenu_btnUpdate;
+        private System.Windows.Forms.ToolStripMenuItem numbersCxtMenu_btnEdit;
         private System.Windows.Forms.ToolStripMenuItem numbersCxtMenu_btnDelete;
+        private System.Windows.Forms.ListView lstViewNumbers;
+        private System.Windows.Forms.ColumnHeader cHeaderNumber;
     }
 }
 
