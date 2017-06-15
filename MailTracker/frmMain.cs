@@ -220,14 +220,10 @@ namespace MailTracker
 // TODO: add focus and read from clipboard when new
 // TODO: doubleclick for editing
 // TODO: message box on delete
-// TODO: rename update -> edit                          +
 // TODO: update & update all
-// TODO: -- add closed flag to numbers                  +
 // TODO: -- add indication for closed
 // TODO: local storage
 // TODO: read from local storage when click
-// TODO: clear variables when list is empty             +
 // TODO: backup database
 // TODO: report generator
-// TODO: change listbox -> listview                     +
 // TODO: add closed to number form
