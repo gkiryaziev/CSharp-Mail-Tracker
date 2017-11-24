@@ -34,6 +34,19 @@ namespace MailTracker
             _oldNumber = number;
             btnAction.Text = "Update";
             txtNumber.Text = number;
+
+            // check is slosed
+            try
+            {
+                int closed = dbm.IsNumberClosed(number);
+                chkBoxClosed.Checked = closed != 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             this.ShowDialog();
         }
 
@@ -94,7 +107,7 @@ namespace MailTracker
             {
                 try
                 {
-                    _dbm.UpdateNumber(_oldNumber, txtNumber.Text);
+                    _dbm.UpdateNumber(_oldNumber, txtNumber.Text, Convert.ToInt32(chkBoxClosed.Checked));
                     closeForm = true;
                 }
                 catch (Exception ex)

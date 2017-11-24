@@ -52,8 +52,10 @@ namespace MailTracker.Db
 
                 var n = db.Execute(@"CREATE TABLE IF NOT EXISTS number (
                     id     INTEGER      PRIMARY KEY AUTOINCREMENT,
-                    number VARCHAR (20) NOT NULL,
-                    closed INTEGER      DEFAULT (0));");
+                    number VARCHAR (20) NOT NULL
+                                        UNIQUE,
+                    closed INTEGER      DEFAULT (0) 
+                    );");
             }
         }
 
@@ -71,11 +73,11 @@ namespace MailTracker.Db
         // ----------------------------------
         // Update Number Method
         // ----------------------------------
-        public void UpdateNumber(string oldNumber, string newNumber)
+        public void UpdateNumber(string oldNumber, string newNumber, int closed)
         {
             using (SQLiteConnection db = new SQLiteConnection(connString))
             {
-                db.Execute("UPDATE number SET number = ? WHERE number = ?;", new { newNumber, oldNumber });
+                db.Execute("UPDATE number SET number = @newNumber, closed = @closed WHERE number = @oldNumber;", new { newNumber, closed, oldNumber });
             }
         }
 
@@ -87,6 +89,18 @@ namespace MailTracker.Db
             using (SQLiteConnection db = new SQLiteConnection(connString))
             {
                 db.Execute("DELETE FROM number WHERE number = ?;", new { number });
+            }
+        }
+
+        // ----------------------------------
+        // Check if Number is Closed Method
+        // ----------------------------------
+        public int IsNumberClosed(string number)
+        {
+            using (SQLiteConnection db = new SQLiteConnection(connString))
+            {
+                return db.Query<Numbers>("SELECT closed as Closed from number where number = @number",
+                    new { number }).SingleOrDefault().Closed;
             }
         }
     }

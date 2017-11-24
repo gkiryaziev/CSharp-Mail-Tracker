@@ -30,11 +30,12 @@
         {
             this.btnAction = new System.Windows.Forms.Button();
             this.txtNumber = new System.Windows.Forms.TextBox();
+            this.chkBoxClosed = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btnAction
             // 
-            this.btnAction.Location = new System.Drawing.Point(185, 10);
+            this.btnAction.Location = new System.Drawing.Point(249, 8);
             this.btnAction.Name = "btnAction";
             this.btnAction.Size = new System.Drawing.Size(54, 23);
             this.btnAction.TabIndex = 0;
@@ -44,22 +45,33 @@
             // 
             // txtNumber
             // 
-            this.txtNumber.Location = new System.Drawing.Point(12, 12);
+            this.txtNumber.Location = new System.Drawing.Point(76, 10);
             this.txtNumber.Name = "txtNumber";
             this.txtNumber.Size = new System.Drawing.Size(167, 20);
             this.txtNumber.TabIndex = 1;
             // 
-            // frmNumbers
+            // chkBoxClosed
+            // 
+            this.chkBoxClosed.AutoSize = true;
+            this.chkBoxClosed.Location = new System.Drawing.Point(12, 12);
+            this.chkBoxClosed.Name = "chkBoxClosed";
+            this.chkBoxClosed.Size = new System.Drawing.Size(58, 17);
+            this.chkBoxClosed.TabIndex = 2;
+            this.chkBoxClosed.Text = "Closed";
+            this.chkBoxClosed.UseVisualStyleBackColor = true;
+            // 
+            // frmNumber
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(248, 46);
+            this.ClientSize = new System.Drawing.Size(313, 41);
+            this.Controls.Add(this.chkBoxClosed);
             this.Controls.Add(this.txtNumber);
             this.Controls.Add(this.btnAction);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmNumbers";
+            this.Name = "frmNumber";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Track Number";
             this.ResumeLayout(false);
@@ -71,5 +83,6 @@
 
         private System.Windows.Forms.Button btnAction;
         private System.Windows.Forms.TextBox txtNumber;
+        private System.Windows.Forms.CheckBox chkBoxClosed;
     }
 }

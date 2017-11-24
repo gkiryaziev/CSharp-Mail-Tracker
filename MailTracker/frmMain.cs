@@ -104,17 +104,24 @@ namespace MailTracker
                 return;
             }
 
-            // Logging
-            tbtnUpdate.Enabled = false;
-            ssLoging.Text = "Updating...";
-            var stopwatch = new Stopwatch();
-            stopwatch.Start();
-
             try
             {
+                // Logging
+                tbtnUpdate.Enabled = false;
+                ssLoging.Text = "Updating...";
+                var stopwatch = new Stopwatch();
+                stopwatch.Start();
+
+                // geting data
                 dgvResults.DataSource = await trm.Track(number, language);
                 dgvResults.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
                 //dgvResults.Columns[0].HeaderText = "Date";
+
+                // Logging
+                stopwatch.Stop();
+                long elapsed_time = stopwatch.ElapsedMilliseconds;
+                ssLoging.Text = $"Done. ({elapsed_time} ms.)";
+                tbtnUpdate.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -122,12 +129,6 @@ namespace MailTracker
                 ssLoging.Text = "Error!";
                 return;
             }
-
-            // Logging
-            stopwatch.Stop();
-            long elapsed_time = stopwatch.ElapsedMilliseconds;
-            ssLoging.Text = $"Done. ({elapsed_time} ms.)";
-            tbtnUpdate.Enabled = true;
         }
 
         //----------------------------------
@@ -226,4 +227,4 @@ namespace MailTracker
 // TODO: read from local storage when click
 // TODO: backup database
 // TODO: report generator
-// TODO: add closed to number form
+// TODO: -- add closed to number form

@@ -18,9 +18,12 @@ namespace MailTracker.Db
         List<Numbers> SelectNumbers();
         // select number
         // update number
-        void UpdateNumber(string oldNumber, string newNumber);
+        void UpdateNumber(string oldNumber, string newNumber, int closed);
         // delete number
         void DeleteNumber(string number);
+        // check if number is closed
+        int IsNumberClosed(string number);
+
         // create tables
         void CreateTables();
     }
