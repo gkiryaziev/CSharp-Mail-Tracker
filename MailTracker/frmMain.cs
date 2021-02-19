@@ -32,9 +32,9 @@ namespace MailTracker
             dbm.CreateTables();
 
             // default language is English
-            mbtnLangEnglish.Checked = true;
-            language = "en";
-            ssLoging.Image = imageListMain.Images[0];
+            mbtnLangGreek.Checked = true;
+            language = "el";
+            ssLoging.Image = imageListMain.Images[1];
 
             trm = new TrackerManager(dbm);
 

@@ -3,6 +3,7 @@ using MailTracker.Tracker.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -41,6 +42,9 @@ namespace MailTracker.Tracker
             // client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:19.0) Gecko/20100101 Firefox/19.0");
 
             FormUrlEncodedContent content = new FormUrlEncodedContent(values);
+
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             HttpResponseMessage response = await client.PostAsync(URL, content);
 
             string responseString = await response.Content.ReadAsStringAsync();
